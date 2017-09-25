@@ -1,7 +1,7 @@
 Summary:        Fedora package repositories
 Name:           fedora-repos
 Version:        28
-Release:        0.2
+Release:        0.3%{?dist}
 License:        MIT
 Group:          System Environment/Base
 URL:            https://pagure.io/fedora-repos/
@@ -13,6 +13,7 @@ Requires:       fedora-repos-rawhide = %{version}-%{release}
 Requires:       fedora-gpg-keys = %{version}-%{release}
 Obsoletes:      fedora-repos-anaconda < 22-0.3
 BuildArch:      noarch
+BuildRequires:  fedora-release = %{version}
 
 %description
 Fedora package repository files for yum and dnf along with gpg public keys
@@ -84,6 +85,11 @@ done
 /etc/pki/rpm-gpg/*
 
 %changelog
+* Mon Sep 25 2017 Matthew Miller <mattdm@fedoraproject.org> - 28-0.3
+- add dist tag to align with packaging guidelines (and to solve a problem for MBS)
+- added BuildRequires on fedora-release of the same version, to prevent possible
+  confusion with the dist-tag not matching the package version.
+
 * Fri Sep 22 2017 Patrick Uiterwijk <patrick@puiterwijk.org> - 28-0.2
 - Split out GPG keys into fedora-gpg-keys
 
