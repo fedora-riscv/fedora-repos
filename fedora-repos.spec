@@ -1,7 +1,7 @@
 Summary:        Fedora package repositories
 Name:           fedora-repos
 Version:        28
-Release:        5%{?_module_build:%{?dist}}
+Release:        6%{?_module_build:%{?dist}}
 License:        MIT
 URL:            https://fedoraproject.org 
 Provides:       fedora-repos(%{version})
@@ -65,6 +65,8 @@ Source101:      fedora-updates-modular.repo
 Source102:      fedora-updates-testing-modular.repo
 Source103:      fedora-rawhide-modular.repo
 Source104:      RPM-GPG-KEY-fedora-modularity
+
+Source150:      RPM-GPG-KEY-fedora-iot-2019
 
 %description
 Fedora package repository files for yum and dnf along with gpg public keys
@@ -162,6 +164,9 @@ done
 /etc/pki/rpm-gpg/RPM-GPG-KEY-*
 
 %changelog
+* Wed Nov 14 2018 Mohan Boddu <mboddu@bhujji.com> - 28-6
+- Adding fedora-iot-2019 key
+
 * Wed Aug 22 2018 Mohan Boddu <mboddu@bhujji.com> - 28-5
 - Fixing F30 key
 - Fixing the changelog day for 28-0.7
