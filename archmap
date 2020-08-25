@@ -1,9 +1,11 @@
 fedora-7-primary: i386 x86_64 ppc ppc64
 
 fedora-8-primary: i386 x86_64 ppc ppc64
+fedora-8-primary-original:
 
 fedora-9-primary: i386 x86_64 ppc ppc64
 fedora-9-secondary: ia64
+fedora-9-primary-original:
 
 fedora-10-primary: i386 x86_64 ppc ppc64
 
@@ -60,6 +62,7 @@ fedora-27-primary: i386 x86_64 armhfp aarch64 ppc64 ppc64le s390x
 fedora-28-primary: i386 x86_64 armhfp aarch64 ppc64 ppc64le s390x
 
 fedora-29-primary: i386 x86_64 armhfp aarch64 ppc64 ppc64le s390x
+fedora-modularity:
 
 fedora-30-primary: i386 x86_64 armhfp aarch64 ppc64le s390x
 

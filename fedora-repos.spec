@@ -150,8 +150,11 @@ pushd $RPM_BUILD_ROOT/etc/pki/rpm-gpg/
 ln -s RPM-GPG-KEY-fedora-%{rawhide_release}-primary RPM-GPG-KEY-fedora-eln-primary
 for keyfile in RPM-GPG-KEY*; do
     key=${keyfile#RPM-GPG-KEY-} # e.g. 'fedora-20-primary'
-    arches=$(sed -ne "s/^${key}://p" %{_sourcedir}/archmap) \
-        || echo "WARNING: no archmap entry for $key"
+    if ! grep -q "^${key}:" %{_sourcedir}/archmap; then
+        echo "ERROR: no archmap entry for $key"
+        exit 1
+    fi
+    arches=$(sed -ne "s/^${key}://p" %{_sourcedir}/archmap)
     for arch in $arches; do
         # replace last part with $arch (fedora-20-primary -> fedora-20-$arch)
         ln -s $keyfile ${keyfile%%-*}-$arch # NOTE: RPM replaces %% with %
