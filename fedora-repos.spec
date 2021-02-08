@@ -14,6 +14,8 @@ Obsoletes:      fedora-repos-anaconda < 22-0.3
 Obsoletes:      fedora-repos-modular < 29-0.6
 Provides:       fedora-repos-modular = %{version}-%{release}
 BuildArch:      noarch
+# Required by %%check
+BuildRequires:  gnupg
 
 Source1:        archmap
 Source2:        fedora.repo
@@ -174,6 +176,13 @@ install -d -m 755 $RPM_BUILD_ROOT/etc/ostree/remotes.d/
 install -m 644 %{_sourcedir}/fedora.conf $RPM_BUILD_ROOT/etc/ostree/remotes.d/
 install -m 644 %{_sourcedir}/fedora-compose.conf $RPM_BUILD_ROOT/etc/ostree/remotes.d/
 
+# Check the builder is on supported architectures
+TMPRING=$(mktemp)
+for VER in %{version} %{rawhide_release}; do
+  gpg --no-default-keyring --keyring="$TMPRING" \
+    --import $RPM_BUILD_ROOT%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-fedora-${VER}-$(arch)
+done
+rm -f "$TMPRING"
 %files
 %dir /etc/yum.repos.d
 %config(noreplace) /etc/yum.repos.d/fedora.repo
