@@ -178,9 +178,15 @@ install -m 644 %{_sourcedir}/fedora-compose.conf $RPM_BUILD_ROOT/etc/ostree/remo
 
 # Check the builder is on supported architectures
 TMPRING=$(mktemp)
+ARCH=$(arch)
+case "$ARCH" in
+  i?86)   BASEARCH=i386 ;;
+  armv?l) BASEARCH=armhfp ;;
+  *)      BASEARCH=$ARCH ;;
+esac
 for VER in %{version} %{rawhide_release}; do
   gpg --no-default-keyring --keyring="$TMPRING" \
-    --import $RPM_BUILD_ROOT%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-fedora-${VER}-$(arch)
+    --import $RPM_BUILD_ROOT%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-fedora-${VER}-$BASEARCH
 done
 rm -f "$TMPRING"
 %files
