@@ -192,6 +192,15 @@ done
 ln -s RPM-GPG-KEY-fedora-%{version}-primary RPM-GPG-KEY-%{version}-fedora
 popd
 
+# Move keys from EOL releases to another directory to help rpm-ostree based
+# systems that load all keys that exist in the directory
+install -d -m 755 $RPM_BUILD_ROOT/etc/pki/rpm-gpg.eol
+mv  $RPM_BUILD_ROOT/etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-[7-9]-* \
+    $RPM_BUILD_ROOT/etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-1[0-9]-* \
+    $RPM_BUILD_ROOT/etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-2[0-9]-* \
+    $RPM_BUILD_ROOT/etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-3[0-2]-* \
+    $RPM_BUILD_ROOT/etc/pki/rpm-gpg.eol/
+
 # Install repo files
 install -d -m 755 $RPM_BUILD_ROOT/etc/yum.repos.d
 for file in %{_sourcedir}/fedora*repo ; do
@@ -381,6 +390,7 @@ rm -f "$TMPRING"
 %files -n fedora-gpg-keys
 %dir /etc/pki/rpm-gpg
 /etc/pki/rpm-gpg/RPM-GPG-KEY-*
+/etc/pki/rpm-gpg.eol/RPM-GPG-KEY-*
 
 
 %files ostree
