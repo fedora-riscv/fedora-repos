@@ -4,7 +4,7 @@
 Summary:        Fedora package repositories
 Name:           fedora-repos
 Version:        37
-Release:        1%{?eln:.eln%{eln}}
+Release:        2%{?eln:.eln%{eln}}
 License:        MIT
 URL:            https://fedoraproject.org/
 
@@ -79,6 +79,7 @@ Source56:       RPM-GPG-KEY-fedora-36-primary
 Source57:       RPM-GPG-KEY-fedora-37-primary
 Source58:       RPM-GPG-KEY-fedora-38-primary
 Source59:       RPM-GPG-KEY-fedora-39-primary
+Source60:       RPM-GPG-KEY-fedora-40-primary
 # When bumping Rawhide to fN, create N+1 key (and update archmap). (This
 # ensures users have the next future key installed and referenced, even if they
 # don't update very often. This will smooth out Rawhide N->N+1 transition for them).
@@ -409,6 +410,9 @@ rm -f "$TMPRING"
 
 
 %changelog
+* Sun Jan 29 2023 Tomas Hrcka <thrcka@redhat.com> - 37-2
+- Adding F40 key
+
 * Mon Oct 10 2022 Kevin Fenzi <kevin@scrye.com> - 37-1
 - Setup for f37 release. rhbz#2133425
 
