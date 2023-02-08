@@ -1,10 +1,10 @@
-%global rawhide_release 38
-%global updates_testing_enabled 0
+%global rawhide_release 39
+%global updates_testing_enabled 1
 
 Summary:        Fedora package repositories
 Name:           fedora-repos
 Version:        38
-Release:        0.4%{?eln:.eln%{eln}}
+Release:        0.5%{?eln:.eln%{eln}}
 License:        MIT
 URL:            https://fedoraproject.org/
 
@@ -412,6 +412,9 @@ rm -f "$TMPRING"
 
 
 %changelog
+* Wed Feb 08 2023 Tomas Hrcka <thrcka@redhat.com> - 38-0.5
+- Update Rawhide definition, enable updates-testing for Branched
+
 * Wed Jan 25 2023 Tomas Hrcka <thrcka@redhat.com> - 38-0.4
 - Add RPM-GPG-KEY-fedora-40-primary
 
