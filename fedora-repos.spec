@@ -1,10 +1,10 @@
 %global rawhide_release 39
-%global updates_testing_enabled 1
+%global updates_testing_enabled 0
 
 Summary:        Fedora package repositories
 Name:           fedora-repos
 Version:        38
-Release:        0.5%{?eln:.eln%{eln}}
+Release:        1%{?eln:.eln%{eln}}
 License:        MIT
 URL:            https://fedoraproject.org/
 
@@ -412,6 +412,9 @@ rm -f "$TMPRING"
 
 
 %changelog
+* Thu Apr 06 2023 Kevin Fenzi <kevin@scrye.com> - 38-1
+- Disable updates-testing for Branched in prep for release.
+
 * Wed Feb 08 2023 Tomas Hrcka <thrcka@redhat.com> - 38-0.5
 - Update Rawhide definition, enable updates-testing for Branched
 
