@@ -1,10 +1,10 @@
-%global rawhide_release 38
+%global rawhide_release 40
 %global updates_testing_enabled 0
 
 Summary:        Fedora package repositories
 Name:           fedora-repos
 Version:        37
-Release:        2%{?eln:.eln%{eln}}
+Release:        3%{?eln:.eln%{eln}}
 License:        MIT
 URL:            https://fedoraproject.org/
 
@@ -410,6 +410,9 @@ rm -f "$TMPRING"
 
 
 %changelog
+* Tue Aug 08 2023 Samyak Jain <samyak.jn11@gmail.com> - 37-3
+- Setup for rawhide being F40
+
 * Sun Jan 29 2023 Tomas Hrcka <thrcka@redhat.com> - 37-2
 - Adding F40 key
 
