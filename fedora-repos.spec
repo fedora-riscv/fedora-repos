@@ -1,10 +1,10 @@
-%global rawhide_release 39
+%global rawhide_release 40
 %global updates_testing_enabled 0
 
 Summary:        Fedora package repositories
 Name:           fedora-repos
 Version:        39
-Release:        0.4%{?eln:.eln%{eln}}
+Release:        0.5%{?eln:.eln%{eln}}
 License:        MIT
 URL:            https://fedoraproject.org/
 
@@ -393,6 +393,9 @@ rm -f "$TMPRING"
 
 
 %changelog
+* Tue Aug 08 2023 Samyak Jain <samyak.jn11@gmail.com> - 39-0.5
+- Update Rawhide definition to F40
+
 * Fri Jul 21 2023 Peter Robinson <pbrobinson@fedoraproject.org> - 39-0.4
 - Update IMA keys location for kernel/dracut
 
