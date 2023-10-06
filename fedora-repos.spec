@@ -1,10 +1,10 @@
 %global rawhide_release 40
-%global updates_testing_enabled 1
+%global updates_testing_enabled 0
 
 Summary:        Fedora package repositories
 Name:           fedora-repos
 Version:        39
-Release:        0.6%{?eln:.eln%{eln}}
+Release:        1%{?eln:.eln%{eln}}
 License:        MIT
 URL:            https://fedoraproject.org/
 
@@ -395,6 +395,9 @@ rm -f "$TMPRING"
 
 
 %changelog
+* Fri Oct 06 2023 Kevin Fenzi <kevin@scrye.com> - 39-1
+- Disable updates_testing for release.
+
 * Wed Sep 06 2023 Tomas Hrcka <thrcka@redhat.com> - 39-0.6
 - added Fedora 41 keys
 - enabled updates_testing repository
