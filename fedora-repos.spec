@@ -1,10 +1,10 @@
-%global rawhide_release 40
+%global rawhide_release 41
 %global updates_testing_enabled 0
 
 Summary:        Fedora package repositories
 Name:           fedora-repos
-Version:        40
-Release:        0.2%{?eln:.eln%{eln}}
+Version:        41
+Release:        0.1%{?eln:.eln%{eln}}
 License:        MIT
 URL:            https://fedoraproject.org/
 
@@ -397,6 +397,9 @@ rm -f "$TMPRING"
 
 
 %changelog
+* Tue Feb 13 2024 Samyak Jain <samyak.jn11@gmail.com> - 41-0.1
+- Setup for rawhide being F41
+
 * Wed Sep 27 2023 Sandro Bonazzola <sbonazzo@redhat.com> - 40-0.2
 - Allow ELN installation without Rawhide repos
 
