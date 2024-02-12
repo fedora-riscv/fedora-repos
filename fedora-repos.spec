@@ -81,6 +81,7 @@ Source58:       RPM-GPG-KEY-fedora-38-primary
 Source59:       RPM-GPG-KEY-fedora-39-primary
 Source60:       RPM-GPG-KEY-fedora-40-primary
 Source61:       RPM-GPG-KEY-fedora-41-primary
+Source62:       RPM-GPG-KEY-fedora-42-primary
 
 # When bumping Rawhide to fN, create N+1 key (and update archmap). (This
 # ensures users have the next future key installed and referenced, even if they
