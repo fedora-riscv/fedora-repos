@@ -1,10 +1,10 @@
 %global rawhide_release 41
-%global updates_testing_enabled 0
+%global updates_testing_enabled 1
 
 Summary:        Fedora package repositories
 Name:           fedora-repos
 Version:        40
-Release:        0.3%{?eln:.eln%{eln}}
+Release:        0.4%{?eln:.eln%{eln}}
 License:        MIT
 URL:            https://fedoraproject.org/
 
@@ -398,6 +398,9 @@ rm -f "$TMPRING"
 
 
 %changelog
+* Tue Feb 27 2024 Kevin Fenzi <kevin@scrye.com> - 40-0.4
+- Enable updates-testing for branched. Fixes rhbz#2266096
+
 * Tue Feb 13 2024 Samyak Jain <samyak.jn11@gmail.com> - 40-0.3
 - Update Rawhide definition to F41
 
