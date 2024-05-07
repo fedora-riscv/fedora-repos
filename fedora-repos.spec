@@ -4,7 +4,7 @@
 Summary:        Fedora package repositories
 Name:           fedora-repos
 Version:        39
-Release:        1%{?eln:.eln%{eln}}
+Release:        2%{?eln:.eln%{eln}}
 License:        MIT
 URL:            https://fedoraproject.org/
 
@@ -90,13 +90,12 @@ Source150:      RPM-GPG-KEY-fedora-iot-2019
 Source151:      fedora.conf
 Source152:      fedora-compose.conf
 
-# ima certs
-Source500:      fedora-38-ima.cert
-Source501:      fedora-38-ima.der
-Source502:      fedora-38-ima.pem
-Source503:      fedora-39-ima.cert
-Source504:      fedora-39-ima.der
-Source505:      fedora-39-ima.pem
+# IMA certs: dracut integrity module only recognizes DER format
+Source500:      fedora-ima-ca.der
+Source501:      fedora-39-ima.der
+Source502:      fedora-40-ima.der
+Source503:      fedora-41-ima.der
+Source504:      fedora-42-ima.der
 
 %description
 Fedora package repository files for yum and dnf along with gpg public keys.
@@ -179,9 +178,11 @@ done
 ln -s RPM-GPG-KEY-fedora-%{version}-primary RPM-GPG-KEY-%{version}-fedora
 popd
 
-# Install the ima keys
+# Install the IMA certs
 install -d -m 755 $RPM_BUILD_ROOT/etc/keys/ima
-install -m 644 %{_sourcedir}/fedora*ima.* $RPM_BUILD_ROOT/etc/keys/ima/
+install -m 644 %{_sourcedir}/fedora*ima.der $RPM_BUILD_ROOT/etc/keys/ima/
+install -d -m 755 $RPM_BUILD_ROOT/usr/share/ima/
+install -m 644 %{_sourcedir}/fedora-ima-ca.der $RPM_BUILD_ROOT/usr/share/ima/ca.der
 
 # Install repo files
 install -d -m 755 $RPM_BUILD_ROOT/etc/yum.repos.d
@@ -382,7 +383,10 @@ rm -f "$TMPRING"
 %files -n fedora-gpg-keys
 %dir /etc/pki/rpm-gpg
 /etc/pki/rpm-gpg/RPM-GPG-KEY-*
+
+# ima-certs
 /etc/keys/ima/fedora*ima*
+/usr/share/ima/ca.der
 
 
 %files ostree
@@ -395,6 +399,9 @@ rm -f "$TMPRING"
 
 
 %changelog
+* Thu May 23 2024 Coiby Xu <coxu@redhat.com> - 39-2
+- add/update IMA certs
+
 * Fri Oct 06 2023 Kevin Fenzi <kevin@scrye.com> - 39-1
 - Disable updates_testing for release.
 
