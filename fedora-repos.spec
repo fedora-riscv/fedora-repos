@@ -4,7 +4,7 @@
 Summary:        Fedora package repositories
 Name:           fedora-repos
 Version:        41
-Release:        0.2%{?eln:.eln%{eln}}
+Release:        0.3%{?eln:.eln%{eln}}
 License:        MIT
 URL:            https://fedoraproject.org/
 
@@ -82,6 +82,7 @@ Source59:       RPM-GPG-KEY-fedora-39-primary
 Source60:       RPM-GPG-KEY-fedora-40-primary
 Source61:       RPM-GPG-KEY-fedora-41-primary
 Source62:       RPM-GPG-KEY-fedora-42-primary
+Source63:       RPM-GPG-KEY-fedora-43-primary
 
 # When bumping Rawhide to fN, create N+1 key (and update archmap). (This
 # ensures users have the next future key installed and referenced, even if they
@@ -401,6 +402,9 @@ rm -f "$TMPRING"
 
 
 %changelog
+* Sat Aug 10 2024 Samyak Jain <samyak.jn11@gmail.com> - 41-0.3
+- Add RPM-GPG-KEY-fedora-43-primary
+
 * Wed May 08 2024 Coiby Xu <coxu@redhat.com> - 41-0.2
 - add/update IMA certs
 
