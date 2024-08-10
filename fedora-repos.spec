@@ -82,6 +82,7 @@ Source59:       RPM-GPG-KEY-fedora-39-primary
 Source60:       RPM-GPG-KEY-fedora-40-primary
 Source61:       RPM-GPG-KEY-fedora-41-primary
 Source62:       RPM-GPG-KEY-fedora-42-primary
+Source63:       RPM-GPG-KEY-fedora-43-primary
 
 # When bumping Rawhide to fN, create N+1 key (and update archmap). (This
 # ensures users have the next future key installed and referenced, even if they
@@ -402,6 +403,7 @@ rm -f "$TMPRING"
 %changelog
 * Fri Aug 16 2024 Petr Menšík <pemensik@redhat.com> - 39-3
 - Setup for rawhide being F42
+- Add RPM-GPG-KEY-fedora-43-primary
 
 * Thu May 23 2024 Coiby Xu <coxu@redhat.com> - 39-2
 - add/update IMA certs
