@@ -1,10 +1,10 @@
-%global rawhide_release 40
+%global rawhide_release 42
 %global updates_testing_enabled 0
 
 Summary:        Fedora package repositories
 Name:           fedora-repos
 Version:        39
-Release:        2%{?eln:.eln%{eln}}
+Release:        3%{?eln:.eln%{eln}}
 License:        MIT
 URL:            https://fedoraproject.org/
 
@@ -399,6 +399,9 @@ rm -f "$TMPRING"
 
 
 %changelog
+* Fri Aug 16 2024 Petr Menšík <pemensik@redhat.com> - 39-3
+- Setup for rawhide being F42
+
 * Thu May 23 2024 Coiby Xu <coxu@redhat.com> - 39-2
 - add/update IMA certs
 
