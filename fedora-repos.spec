@@ -163,6 +163,14 @@ pushd $RPM_BUILD_ROOT/etc/pki/rpm-gpg/
 # Also add a symlink for Rawhide and ELN keys
 ln -s RPM-GPG-KEY-fedora-%{rawhide_release}-primary RPM-GPG-KEY-fedora-rawhide-primary
 ln -s RPM-GPG-KEY-fedora-%{rawhide_release}-primary RPM-GPG-KEY-fedora-eln-primary
+
+rawhide_next=$((%{rawhide_release}+1))
+rawhide_prev=$((%{rawhide_release}-1))
+rawhide_prev2=$((%{rawhide_release}-2))
+ln -s RPM-GPG-KEY-fedora-${rawhide_next}-primary RPM-GPG-KEY-fedora-rawhide+1-primary
+ln -s RPM-GPG-KEY-fedora-${rawhide_prev}-primary RPM-GPG-KEY-fedora-rawhide-1-primary
+ln -s RPM-GPG-KEY-fedora-${rawhide_prev2}-primary RPM-GPG-KEY-fedora-rawhide-2-primary
+
 for keyfile in RPM-GPG-KEY*; do
     # resolve symlinks, so that we don't need to keep duplicate entries in archmap
     real_keyfile=$(basename $(readlink -f $keyfile))
@@ -233,9 +241,8 @@ done
 # This is necessary for the period when Rawhide gets bumped to N+1 and packages
 # start to be signed with a newer key. Without having the key specified in the
 # repo file, the system would consider the new packages as untrusted.
-rawhide_next=$((%{rawhide_release}+1))
 for repo in $RPM_BUILD_ROOT/etc/yum.repos.d/fedora-rawhide*.repo; do
-    sed -i "/^gpgkey=/ s@AUTO_VALUE@file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-${rawhide_next}-\$basearch@" \
+    sed -i "/^gpgkey=/ s@AUTO_VALUE@file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-rawhide+1-\$basearch@" \
         $repo || exit 1
 done
 
@@ -345,7 +352,7 @@ for repo in $RPM_BUILD_ROOT/etc/yum.repos.d/fedora-rawhide*.repo; do
         exit 1
     fi
     while IFS= read -r line; do
-        if ! echo "$line" | grep -q "RPM-GPG-KEY-fedora-${rawhide_next}"; then
+        if ! echo "$line" | grep -q "RPM-GPG-KEY-fedora-rawhide+1"; then
             echo "ERROR: Fedora ${rawhide_next} GPG key missing in $repo"
             exit 1
         fi
@@ -356,7 +363,7 @@ done
 # them valid
 TMPRING=$(mktemp)
 DBPATH=$(mktemp -d)
-for VER in %{version} %{rawhide_release} ${rawhide_next}; do
+for VER in %{version} %{rawhide_release} ${rawhide_next} ${rawhide_prev} ${rawhide_prev2}; do
   echo -n > "$TMPRING"
   for ARCH in $(sed -ne "s/^fedora-${VER}-primary://p" %{_sourcedir}/archmap)
   do
