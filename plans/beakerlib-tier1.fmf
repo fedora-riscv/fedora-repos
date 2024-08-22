@@ -1,0 +1,8 @@
+summary: Combine all available beakerlib tests for fedora-repos
+discover:
+  - name: fedora_rpms_fedora-repos
+    how: fmf
+    filter: 'tier: 1'
+execute:
+    how: tmt
+

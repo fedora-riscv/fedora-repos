@@ -1,0 +1,6 @@
+summary: Checks all supported branches point to correct rawhide
+test: ./test.sh
+framework: beakerlib
+recommend:
+  - awk
+  - git-core
