@@ -1,7 +1,14 @@
-summary: Checks all supported branches point to correct rawhide
+summary: Checks supported branches point to correct rawhide
+description: |
+  Fetch fedora-repos, obtain current rawhide release from it.
+  Then test current active releases have the same rawhide release
+  version on their stable branches too. Therefore their GPG keys
+  should point to correct rawhide.
 test: ./test.sh
 framework: beakerlib
 tier: 1
-recommend:
+recommend+:
   - awk
   - git-core
+  - curl
+  - jq
