@@ -1,8 +1,0 @@
----
-# This first play always runs on the local staging system
-- hosts: localhost
-  roles:
-  - role: standard-test-beakerlib
-    tags:
-    - classic
-    fmf_filter: "tier: 1"
