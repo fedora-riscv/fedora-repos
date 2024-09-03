@@ -1,10 +1,10 @@
 %global rawhide_release 42
-%global updates_testing_enabled 0
+%global updates_testing_enabled 1
 
 Summary:        Fedora package repositories
 Name:           fedora-repos
 Version:        41
-Release:        0.4%{?eln:.eln%{eln}}
+Release:        0.5%{?eln:.eln%{eln}}
 License:        MIT
 URL:            https://fedoraproject.org/
 
@@ -402,6 +402,9 @@ rm -f "$TMPRING"
 
 
 %changelog
+* Tue Sep 03 2024 Samyak Jain <samyak.jn11@gmail.com> - 41-0.5
+- Enable updates-testing for branched. Fixes rhbz#2308952
+
 * Tue Aug 13 2024 Samyak Jain <samyak.jn11@gmail.com> - 41-0.4
 - Setup for rawhide being F42
 
