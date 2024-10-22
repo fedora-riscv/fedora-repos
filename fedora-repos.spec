@@ -4,7 +4,7 @@
 Summary:        Fedora package repositories
 Name:           fedora-repos
 Version:        42
-Release:        0.2%{?eln:.eln%{eln}}
+Release:        0.3%{?eln:.eln%{eln}}
 License:        MIT
 URL:            https://fedoraproject.org/
 
@@ -402,6 +402,9 @@ rm -f "$TMPRING"
 
 
 %changelog
+* Tue Oct 22 2024 Stephen Gallagher <sgallagh@redhat.com> - 42-0.3
+- ELN: Drop ResilientStorage
+
 * Wed Sep 18 2024 Stephen Gallagher <sgallagh@redhat.com> - 42-0.2
 - Use mirror links for ELN
 
