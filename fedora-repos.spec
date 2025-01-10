@@ -6,7 +6,7 @@
 Summary:        Fedora package repositories
 Name:           fedora-repos
 Version:        41
-Release:        1.1.rv64%{?eln:.eln%{eln}}
+Release:        1.2.rv64%{?eln:.eln%{eln}}
 License:        MIT
 URL:            https://fedoraproject.org/
 
@@ -203,7 +203,7 @@ stable_enabled=0
 testing_enabled=0
 archive_enabled=0
 eln_enabled=0
-sed -i "s/^enabled=AUTO_VALUE$/enabled=0/" $RPM_BUILD_ROOT/etc/yum.repos.d/fedora-cisco-openh264.repo || exit 1
+sed -i "s/^enabled=1$/enabled=0/" $RPM_BUILD_ROOT/etc/yum.repos.d/fedora-cisco-openh264.repo || exit 1
 %elif 0%{?eln}
 rawhide_enabled=0
 stable_enabled=0
