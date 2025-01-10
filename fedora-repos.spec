@@ -1,6 +1,8 @@
 %global rawhide_release 45
 %global updates_testing_enabled 0
 
+%bcond riscv64 1
+
 Summary:        Fedora package repositories
 Name:           fedora-repos
 Version:        44
@@ -28,6 +30,7 @@ Source5:        fedora-rawhide.repo
 Source6:        fedora-cisco-openh264.repo
 Source7:        fedora-updates-archive.repo
 Source8:        fedora-eln.repo
+Source9:        openkoji-fedora.repo
 
 Source10:       RPM-GPG-KEY-fedora-7-primary
 Source11:       RPM-GPG-KEY-fedora-8-primary
@@ -201,7 +204,14 @@ for file in %{_sourcedir}/fedora*repo ; do
 done
 
 # Enable or disable repos based on current release cycle state.
-%if 0%{?eln}
+%if %{with riscv64}
+rawhide_enabled=0
+stable_enabled=0
+testing_enabled=0
+archive_enabled=0
+eln_enabled=0
+sed -i "s/^enabled=1$/enabled=0/" $RPM_BUILD_ROOT/etc/yum.repos.d/fedora-cisco-openh264.repo || exit 1
+%elif 0%{?eln}
 rawhide_enabled=0
 stable_enabled=0
 testing_enabled=0
@@ -262,8 +272,13 @@ install -d -m 755 $RPM_BUILD_ROOT/etc/ostree/remotes.d/
 install -m 644 %{_sourcedir}/fedora.conf $RPM_BUILD_ROOT/etc/ostree/remotes.d/
 install -m 644 %{_sourcedir}/fedora-compose.conf $RPM_BUILD_ROOT/etc/ostree/remotes.d/
 
+%if %{with riscv64}
+install -m 644 %{_sourcedir}/openkoji-fedora.repo $RPM_BUILD_ROOT/etc/yum.repos.d
+%endif
+
 
 %check
+%if %{without riscv64}
 # Make sure all repo variables were substituted
 for repo in $RPM_BUILD_ROOT/etc/yum.repos.d/*.repo; do
     if grep -q AUTO_VALUE $repo; then
@@ -375,9 +390,13 @@ for VER in %{version} %{rawhide_release} ${rawhide_next}; do
   gpg --no-default-keyring --keyring="$TMPRING" --list-keys | grep -A 2 '^pub\s'
 done
 rm -f "$TMPRING"
+%endif
 
 %files
 %dir /etc/yum.repos.d
+%if %{with riscv64}
+%config(noreplace) /etc/yum.repos.d/openkoji-fedora.repo
+%endif
 %config(noreplace) /etc/yum.repos.d/fedora.repo
 %config(noreplace) /etc/yum.repos.d/fedora-cisco-openh264.repo
 %config(noreplace) /etc/yum.repos.d/fedora-updates.repo
