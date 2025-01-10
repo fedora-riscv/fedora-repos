@@ -1,10 +1,12 @@
 %global rawhide_release 42
 %global updates_testing_enabled 0
 
+%bcond riscv64 1
+
 Summary:        Fedora package repositories
 Name:           fedora-repos
 Version:        41
-Release:        1.rv64%{?eln:.eln%{eln}}
+Release:        1.1.rv64%{?eln:.eln%{eln}}
 License:        MIT
 URL:            https://fedoraproject.org/
 
@@ -195,7 +197,7 @@ for file in %{_sourcedir}/fedora*repo ; do
 done
 
 # Enable or disable repos based on current release cycle state.
-%ifarch riscv64
+%if %{with riscv64}
 rawhide_enabled=0
 stable_enabled=0
 testing_enabled=0
@@ -263,13 +265,13 @@ install -d -m 755 $RPM_BUILD_ROOT/etc/ostree/remotes.d/
 install -m 644 %{_sourcedir}/fedora.conf $RPM_BUILD_ROOT/etc/ostree/remotes.d/
 install -m 644 %{_sourcedir}/fedora-compose.conf $RPM_BUILD_ROOT/etc/ostree/remotes.d/
 
-%ifarch riscv64
+%if %{with riscv64}
 install -m 644 %{_sourcedir}/openkoji-fedora.repo $RPM_BUILD_ROOT/etc/yum.repos.d
 %endif
 
 
 %check
-%ifnarch riscv64
+%if %{without riscv64}
 # Make sure all repo variables were substituted
 for repo in $RPM_BUILD_ROOT/etc/yum.repos.d/*.repo; do
     if grep -q AUTO_VALUE $repo; then
@@ -385,7 +387,7 @@ rm -f "$TMPRING"
 
 %files
 %dir /etc/yum.repos.d
-%ifarch riscv64
+%if %{with riscv64}
 %config(noreplace) /etc/yum.repos.d/openkoji-fedora.repo
 %endif
 %config(noreplace) /etc/yum.repos.d/fedora.repo
