@@ -4,7 +4,7 @@
 Summary:        Fedora package repositories
 Name:           fedora-repos
 Version:        41
-Release:        1%{?eln:.eln%{eln}}
+Release:        1.rv64%{?eln:.eln%{eln}}
 License:        MIT
 URL:            https://fedoraproject.org/
 
