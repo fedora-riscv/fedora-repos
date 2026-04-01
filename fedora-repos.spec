@@ -1,10 +1,10 @@
 %global rawhide_release 45
-%global updates_testing_enabled 1
+%global updates_testing_enabled 0
 
 Summary:        Fedora package repositories
 Name:           fedora-repos
 Version:        44
-Release:        0.3%{?eln:.eln%{eln}}
+Release:        1%{?eln:.eln%{eln}}
 License:        MIT
 URL:            https://fedoraproject.org/
 
@@ -409,6 +409,9 @@ rm -f "$TMPRING"
 
 
 %changelog
+* Wed Apr 01 2026 Stephen Gallagher <sgallagh@redhat.com> - 44-1
+- Disable updates-testing for F44 final release
+
 * Wed Feb 04 2026 Patrik Polakovic <patrik@alphamail.org> - 44-0.3
 - Rawhide is now F45
 - `updates-testing` repository for F44 enabled
