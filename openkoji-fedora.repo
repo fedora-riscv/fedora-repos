@@ -1,5 +1,5 @@
 [fedora-riscv-koji]
 name=Fedora RISC-V Koji
-baseurl=http://openkoji.iscas.ac.cn/kojifiles/repos/f$releasever-build/latest/riscv64/
+baseurl=https://koji.hox.org.cn/kojifiles/repos/f$releasever-build/latest/riscv64/
 enabled=1
 gpgcheck=0
